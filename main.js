@@ -39,6 +39,11 @@ function insertRow(data){
   var cell3 = newRow.insertCell(2);
   cell3.innerHTML = data.phone;
 
+  var cell4 = newRow.insertCell(3);
+  cell4.innerHTML = `<a class="btn btn-info btn-sm text-white">Edit</a>
+                     <a class="btn btn-danger btn-sm text-white">Delete</a> 
+                    `;
+
   
 
 }
