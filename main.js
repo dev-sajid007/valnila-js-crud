@@ -82,3 +82,7 @@ function updateRecord(data){
 }
 
 
+function onDelete(td){
+    var row = td.parentElement.parentElement;
+    document.getElementById('empList').deleteRow(row.rowIndex);
+}
