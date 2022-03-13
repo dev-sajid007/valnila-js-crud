@@ -40,10 +40,15 @@ function insertRow(data){
   cell3.innerHTML = data.phone;
 
   var cell4 = newRow.insertCell(3);
-  cell4.innerHTML = `<a class="btn btn-info btn-sm text-white">Edit</a>
+  cell4.innerHTML = `<a onClick="onEdit(this)" class="btn btn-info btn-sm text-white">Edit</a>
                      <a class="btn btn-danger btn-sm text-white">Delete</a> 
                     `;
+}
 
-  
 
+function onEdit(td){
+  var selectedRow = td.parentElement.parentElement;
+  document.getElementById('name').value = selectedRow.cells[0].innerHTML;
+  document.getElementById('email').value = selectedRow.cells[1].innerHTML;
+  document.getElementById('phone').value = selectedRow.cells[3].innerHTML;
 }
