@@ -7,10 +7,19 @@
 //     document.getElementById('h1').innerHTML=JSON.parse(item.name[0]);
 // }));
 
+var selectedRow = null;
+
 function onSubmit(){
 
   var formData = readData();
-  insertRow(formData)
+  if(selectedRow == null){
+      insertRow(formData);
+  }
+  else{
+      updateRecord(formData)
+  }
+  resetForm();
+
 }
 
 
@@ -27,6 +36,7 @@ function readData(){
 
 
 function insertRow(data){
+
   var table = document.getElementById('empList').getElementsByTagName('tbody')[0];
   var newRow = table.insertRow(table.length);
 
@@ -41,14 +51,34 @@ function insertRow(data){
 
   var cell4 = newRow.insertCell(3);
   cell4.innerHTML = `<a onClick="onEdit(this)" class="btn btn-info btn-sm text-white">Edit</a>
-                     <a class="btn btn-danger btn-sm text-white">Delete</a> 
+                     <a onClick="onDelete(this)" class="btn btn-danger btn-sm text-white">Delete</a> 
                     `;
+}
+
+function resetForm(){
+  document.getElementById('name').value='';
+  document.getElementById('email').value='';
+  document.getElementById('phone').value='';
+  selectedRow = null;
 }
 
 
 function onEdit(td){
-  var selectedRow = td.parentElement.parentElement;
+
+  selectedRow = td.parentElement.parentElement;
   document.getElementById('name').value = selectedRow.cells[0].innerHTML;
   document.getElementById('email').value = selectedRow.cells[1].innerHTML;
-  document.getElementById('phone').value = selectedRow.cells[3].innerHTML;
+  document.getElementById('phone').value = selectedRow.cells[2].innerHTML;
 }
+
+
+function updateRecord(data){
+  var result = Object.keys(data);
+
+  result.map((item,i) => {
+    selectedRow.cells[i].innerHTML = data[item];
+  });
+
+}
+
+
